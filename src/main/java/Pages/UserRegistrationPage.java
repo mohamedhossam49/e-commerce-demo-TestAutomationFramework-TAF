@@ -3,9 +3,12 @@ package Pages;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 
@@ -16,7 +19,7 @@ public Select selectYearofBirth;
 
     public UserRegistrationPage(WebDriver driver) {
         super(driver);
-        wait = new WebDriverWait(driver, 30);
+        wait = new WebDriverWait(driver, 50);
     }
     @FindBy(id = "gender-male")
     WebElement genderMaleButton;
@@ -64,7 +67,11 @@ public void userRegistration(String firstname, String lastname, String email,
 selectDayofBirth = new Select(dayOfBirthDropDown);
 selectMonthofBirth = new Select(monthOfBirthDropDown);
 selectYearofBirth =  new Select(yearOfBirthDropDown);
+List<WebElement> userRegisterFields = Arrays.asList(genderMaleButton,firstNameField,lastNameField
+        , dayOfBirthDropDown, monthOfBirthDropDown, yearOfBirthDropDown,
+        emailField,passwordField,confirmPasswordField);
 //Thread.sleep(3000);
+wait.until(ExpectedConditions.visibilityOfAllElements(userRegisterFields));
 
 clickButton(genderMaleButton);
 EnterText(firstNameField,firstname);
@@ -72,6 +79,7 @@ EnterText(firstNameField,firstname);
 EnterText(lastNameField,lastname);
 selectDayofBirth.selectByVisibleText(dayofBirth);
 selectMonthofBirth.selectByVisibleText(monthofBirth);
+wait.until(ExpectedConditions.visibilityOf(yearOfBirthDropDown));
 selectYearofBirth.selectByVisibleText(yearofBirth);
 EnterText(emailField,email);
 

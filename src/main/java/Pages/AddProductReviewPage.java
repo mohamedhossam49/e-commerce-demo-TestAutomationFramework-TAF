@@ -6,7 +6,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.util.concurrent.TimeUnit;
+import java.util.Arrays;
+import java.util.List;
 
 public class AddProductReviewPage extends PageBase {
     public AddProductReviewPage(WebDriver driver) {
@@ -31,9 +32,9 @@ public class AddProductReviewPage extends PageBase {
 
     public void addProductReviewWithRating3(String reviewTitle, String reviewText) {
         //Thread.sleep(3000);
-        wait.until(ExpectedConditions.visibilityOf(reviewTitleField));
+        List<WebElement> reviewFields = Arrays.asList(submitReviewButton,reviewTextField,reviewTitleField);
+        wait.until(ExpectedConditions.visibilityOfAllElements(reviewFields));
         EnterText(reviewTitleField,reviewTitle);
-        wait.until(ExpectedConditions.visibilityOf(reviewTextField));
         EnterText(reviewTextField,reviewText);
         clickButton(addProductRating3Button);
         clickButton(submitReviewButton);

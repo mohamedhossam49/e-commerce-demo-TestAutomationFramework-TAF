@@ -3,6 +3,7 @@ package Pages;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
@@ -12,7 +13,7 @@ public class SearchPage extends PageBase{
 
     public SearchPage(WebDriver driver) {
         super(driver);
-        wait = new WebDriverWait(driver, 30);
+        wait = new WebDriverWait(driver, 50);
     }
     @FindBy(id = "small-searchterms")
     WebElement searchField;
@@ -22,12 +23,16 @@ public class SearchPage extends PageBase{
     List<WebElement> autoCompleteListMenu;
 
     public void searchProductUsingSearchButton(String searchItem){
+        wait.until(ExpectedConditions.visibilityOf(searchField));
         EnterText(searchField,searchItem);
+        wait.until(ExpectedConditions.visibilityOf(searchButton));
         clickButton(searchButton);
         //Thread.sleep(3000);
     }
     public void searchProductUsingAutoSuggestMenu(String searchItem) {
+        wait.until(ExpectedConditions.visibilityOf(searchField));
         EnterText(searchField,searchItem);
+        wait.until(ExpectedConditions.visibilityOfAllElements(autoCompleteListMenu));
         autoCompleteListMenu.get(0).click();
        //Thread.sleep(3000);
     }

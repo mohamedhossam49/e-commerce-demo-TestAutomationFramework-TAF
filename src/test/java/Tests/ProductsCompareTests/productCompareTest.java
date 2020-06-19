@@ -7,6 +7,8 @@ import Tests.TestBases.TestBase;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.util.concurrent.TimeUnit;
+
 public class productCompareTest extends TestBase {
     SearchPage searchObj;
     ProductDetailsPage productDetailsObj;
@@ -37,7 +39,9 @@ public class productCompareTest extends TestBase {
     public void testUserCanClearComparePage(){
         productCompareObj = new ProductComparePage(driver);
         //Thread.sleep(4000);
+        driver.manage().timeouts().pageLoadTimeout(20, TimeUnit.SECONDS);
         productCompareObj.clearComparePage();
+
         Assert.assertTrue(productCompareObj.removeProductsSucessMessage.getText()
                 .contains("no items to compare."));
     }

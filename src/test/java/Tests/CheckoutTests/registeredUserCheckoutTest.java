@@ -5,6 +5,8 @@ import Tests.TestBases.TestBase;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.util.concurrent.TimeUnit;
+
 public class registeredUserCheckoutTest extends TestBase {
     SearchPage searchObj;
     ProductDetailsPage productDetailsObj;
@@ -14,7 +16,7 @@ public class registeredUserCheckoutTest extends TestBase {
     OrderDetailsPage orderDetailsObj;
     String firstName = "Mohamed";
     String lastName = "Hossam";
-    String email = "demo@125.com";
+    String email = "demowS@125.com";
     String password = "123456";
     @Test
     public void testUserCanSearchForProduct() {
@@ -35,6 +37,7 @@ public class registeredUserCheckoutTest extends TestBase {
         checkoutObj = new CheckoutPage(driver);
         shoppingCartObj.openCheckoutPage();
         checkoutObj.openUserRegisterPage();
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         checkoutObj.newUserRegisteration(firstName,lastName,email,password);
         Assert.assertTrue(checkoutObj.registrationSuccessMessage.getText()
                 .contains("registration completed"));
@@ -44,6 +47,7 @@ public class registeredUserCheckoutTest extends TestBase {
         shoppingCartObj = new ShoppingCartPage(driver);
         checkoutObj= new CheckoutPage(driver);
         checkoutObj.continueToCheckout();
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         shoppingCartObj.openCheckoutPage();
         checkoutObj.checkOutByMoneyOrder("Algeria","shd","5thditrs"
                 ,"12566","01131131");

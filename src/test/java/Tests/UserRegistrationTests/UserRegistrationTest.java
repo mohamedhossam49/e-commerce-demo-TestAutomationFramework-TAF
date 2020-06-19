@@ -15,7 +15,7 @@ public class UserRegistrationTest extends TestBase {
         userRegister = new UserRegistrationPage(driver);
         home.openRegistrationPage();
         userRegister.userRegistration("a","b",
-                "demo1982@test.com","1234566","24",
+                "demo21982@test.com","1234566","24",
                 "December","1998");
         Assert.assertTrue(userRegister.registrationSuccessMessage.isDisplayed());
     }

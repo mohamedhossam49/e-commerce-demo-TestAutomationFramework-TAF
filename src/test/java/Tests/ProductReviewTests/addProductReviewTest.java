@@ -6,6 +6,8 @@ import Tests.TestBases.TestBase;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.util.concurrent.TimeUnit;
+
 public class addProductReviewTest extends TestBase {
     HomePage homeObj;
     UserRegistrationPage registerObj;
@@ -13,14 +15,14 @@ public class addProductReviewTest extends TestBase {
     ProductDetailsPage productDetailsObj;
     AddProductReviewPage addProductReviewObj;
     @Test
-    public void testUserCanRegisterSuccessfully()  {
+    public void testUserCanRegisterSuccessfully() throws InterruptedException {
         homeObj = new HomePage(driver);
         registerObj = new UserRegistrationPage(driver);
         homeObj.openRegistrationPage();
-        //Thread.sleep(3000);
+        Thread.sleep(3000);
         registerObj.userRegistration("a", "b",
-                "demo98@test.com", "1234566", "24",
-                "December", "53");
+                "demox9938d@test.com", "1234566", "24",
+                "December", "1998");
     }
     @Test(dependsOnMethods = {"testUserCanRegisterSuccessfully"})
     public void testUserCanSearchProductUsingAutoComplete()  {
